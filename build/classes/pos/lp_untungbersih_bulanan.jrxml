@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="lp_penjualan_hari" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="266c1256-f6d3-483c-80d7-f1e88ed521ef">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="pBln" class="java.lang.String"/>
+	<parameter name="pThn" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT tb_pengeluaran.*, (SELECT tb_keuntungan.untung_bersih FROM tb_keuntungan WHERE tb_keuntungan.Bulan = $P{pBln} AND tb_keuntungan.Tahun = $P{pThn}) AS untung_bersih, (SELECT tb_keuntungan.untung_kotor FROM tb_keuntungan WHERE tb_keuntungan.Bulan = $P{pBln} AND tb_keuntungan.Tahun = $P{pThn}) AS untung_kotor, DATE_FORMAT( NOW( ) ,  '%d-%M-20%y' ) AS tgl, DATE_FORMAT( tb_pengeluaran.Tanggal,  '%M 20%y' ) AS bln FROM tb_pengeluaran WHERE DATE_FORMAT( tb_pengeluaran.Tanggal,  '%m' ) = $P{pBln} AND DATE_FORMAT( tb_pengeluaran.Tanggal,  '20%y' ) = $P{pThn}]]>
+	</queryString>
+	<field name="id_pengeluaran" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Tanggal" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama_pengeluaran" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Pengeluaran" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="untung_bersih" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="untung_kotor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tgl" class="java.lang.String"/>
+	<field name="bln" class="java.lang.String"/>
+	<title>
+		<band height="110" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="121" height="29" uuid="786d243c-9206-412a-83e8-b2b48b8e9bce"/>
+				<textElement>
+					<font fontName="Verdana" size="18"/>
+				</textElement>
+				<text><![CDATA[GM Lampung]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="29" width="131" height="20" uuid="32b029bd-b2b3-4d07-a143-f1921b49ff61"/>
+				<textElement>
+					<font fontName="Verdana" size="14"/>
+				</textElement>
+				<text><![CDATA[Bandar Lampung]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="60" width="273" height="20" uuid="86743170-2d5d-4a84-97f1-8cc36f42716f"/>
+				<textElement>
+					<font fontName="Verdana" size="12"/>
+				</textElement>
+				<text><![CDATA[Laporan Pengeluaran dan Keuntungan Bersih Bulan :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="60" width="100" height="20" uuid="22416094-f173-4a38-8f84-db2e2e6649f9"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bln}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="104" y="80" width="119" height="20" uuid="20613c41-57a3-4ee9-bf25-a3962d59e458"/>
+				<textElement>
+					<font fontName="Verdana" size="12"/>
+				</textElement>
+				<text><![CDATA[Untung Kotor : Rp.]]></text>
+			</staticText>
+			<textField pattern="###0">
+				<reportElement x="223" y="80" width="58" height="20" uuid="3df8677c-f197-4ab6-8d48-aefe00f27d54"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{untung_kotor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="21cd2a12-ff41-47bf-9d0b-3388f519837f"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tgl}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="392" y="0" width="53" height="20" uuid="35e68317-0abf-451f-970a-c2e85b5c19d5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Tanggal :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="407" y="80" width="100" height="20" uuid="d6f99ed0-d7d4-40e0-a534-3fe09dd1b94e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{untung_bersih}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="286" y="80" width="121" height="20" uuid="c4d4d49d-424b-4d67-9239-3407f458a435"/>
+				<textElement>
+					<font fontName="Verdana" size="12"/>
+				</textElement>
+				<text><![CDATA[Untung Bersih : Rp.]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="18" splitType="Stretch">
+			<staticText>
+				<reportElement x="137" y="0" width="23" height="18" uuid="c347941a-fff0-40a8-9250-1057e7b06f91"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="0" width="70" height="18" uuid="81103a33-9b62-4f0b-a6a7-bb444c8bb8d4"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="342" y="0" width="84" height="18" uuid="268441e3-b4d7-4150-a982-40530d566923"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Biaya]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="0" width="112" height="18" uuid="d611b2de-6df6-487c-9cfc-78ffb807ff09"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Pengeluaran]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="137" y="0" width="23" height="20" uuid="1d0781fd-4b09-45b6-8d9f-6f64d3a61752"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMMMM-yyyy">
+				<reportElement x="160" y="0" width="70" height="20" uuid="8966cbfe-0720-4593-9b47-ebd8721d3d4a"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Tanggal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="342" y="0" width="84" height="20" uuid="fb5345e0-ded7-4e53-b33e-24bf27291e2e"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Pengeluaran}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="0" width="112" height="20" uuid="7f5d6bb2-d32c-4848-b38a-4eaa148d3ffa"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nama_pengeluaran}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+</jasperReport>
